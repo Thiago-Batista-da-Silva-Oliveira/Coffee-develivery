@@ -7,10 +7,8 @@ export const THEME = extendTheme({
       dark: '#4B2995',
       light: '#EBE5F9'
     },
-    yellow: {
-     default: '#DBAC2C',
-     dark: '#C47F17',
-    },
+    yellow: '#DBAC2C',
+    yellow_dark: '#C47F17',
     gray: {
       900: '#FAFAFA',
       800: '#F3F2F2',
@@ -23,11 +21,9 @@ export const THEME = extendTheme({
       100: '#272221'
     },
     white: '#FFFFFF',
-    red: {
-     dark: '#C44117',
-     light: '#F2DFD8',
-     default: '#E8BAAB'
-    }
+    red: '#C44117',
+    red_light: '#F2DFD8',
+    red_dark: '#E8BAAB',
   },
   fonts: {
     heading: 'Baloo2_700Bold',
