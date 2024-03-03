@@ -9,11 +9,28 @@ import { AppProvider } from "./src/context";
 import { Center, HStack, Icon, Input, Text, VStack } from "native-base";
 import { THEME } from "./src/theme";
 import { MagnifyingGlass } from "phosphor-react-native";
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { useEffect } from "react";
+
 
 export default function App() {
   const theme = THEME;
   const [robotoFontsLoaded] = useFonts({ Roboto_400Regular });
   const [balooFontsLoaded] = useBalooFonts({ BalooDa2_700Bold });
+
+ const AnimatedViewStack = Animated.createAnimatedComponent(VStack);
+
+  const flex = useSharedValue(0);
+
+  useEffect(() => {
+    flex.value = withTiming(1, { duration: 1000 });
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      flex: flex.value,
+    };
+  });
 
   return (
     <AppProvider>
@@ -27,7 +44,8 @@ export default function App() {
             translucent
           />
           <VStack flex="1">
-            <VStack height="50%" bgColor="gray.100" padding={10}>
+            <VStack height="50%">
+              <AnimatedViewStack bgColor="gray.100" style={animatedStyle} padding={10}>
               <Header />
               <Center marginTop={-8} flex="1" alignItems="center" justifyContent="center">
                 <VStack space={5}>
@@ -51,6 +69,7 @@ export default function App() {
                   />
                 </VStack>
               </Center>
+              </AnimatedViewStack>
             </VStack>
             <VStack marginTop={-20}>
               <HStack paddingX={10} space={8}>
