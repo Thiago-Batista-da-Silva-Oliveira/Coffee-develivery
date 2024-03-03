@@ -6,7 +6,7 @@ import {
 import { StatusBar } from "react-native";
 import { CoffeeCard, Header, Loading } from "./src/components";
 import { AppProvider } from "./src/context";
-import { Center, HStack, Icon, Input, Text, VStack } from "native-base";
+import { Center, FlatList, HStack, Icon, Input, Text, VStack } from "native-base";
 import { THEME } from "./src/theme";
 import { MagnifyingGlass } from "phosphor-react-native";
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
@@ -31,6 +31,23 @@ export default function App() {
       flex: flex.value,
     };
   });
+
+  const coffeeData = [
+    {
+      id: '1',
+      category:"Tradicional",
+      title:"Latte",
+      price:"R$ 9,90",
+      description:"Café expresso com o dobro de leite e espuma cremosa",
+    },
+    {
+      id: '2',
+      category:"Tradicional",
+      title:"Latte",
+      price:"R$ 9,90",
+      description:"Café expresso com o dobro de leite e espuma cremosa",
+    }
+  ]
 
   return (
     <AppProvider>
@@ -71,15 +88,23 @@ export default function App() {
               </Center>
               </AnimatedViewStack>
             </VStack>
-            <VStack marginTop={-20}>
-              <HStack paddingX={10} space={8}>
-                <CoffeeCard
-                  category="Tradicional"
-                  title="Latte"
-                  price="R$ 9,90"
-                  description="Café expresso com o dobro de leite e espuma cremosa"
+            <VStack flex={1} marginTop={-20}>
+                <FlatList
+                  style={{ paddingHorizontal: 10, gap: 8, flex: 1, maxHeight: 300 }}
+                  horizontal
+                  contentContainerStyle={{ gap: 10 }}
+                  data={coffeeData}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item, index }) => (
+                    <CoffeeCard
+                      category={item.category}
+                      title={item.title}
+                      price={item.price}
+                      description={item.description}
+                      index={index}
+                    />
+                  )}
                 />
-              </HStack>
             </VStack>
           </VStack>
         </>

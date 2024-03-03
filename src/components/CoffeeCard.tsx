@@ -1,5 +1,6 @@
-import { Box, Center, Text, VStack } from "native-base";
+import { Box, Text, VStack } from "native-base";
 import { THEME } from "../theme";
+import Animated, { FadeInRight } from "react-native-reanimated";
 
 interface IProps {
   urlImage?: string;
@@ -7,6 +8,7 @@ interface IProps {
   category: string;
   description: string;
   price: string;
+  index: number;
 }
 
 export const CoffeeCard = ({
@@ -15,10 +17,13 @@ export const CoffeeCard = ({
   price,
   title,
   urlImage,
+  index,
 }: IProps) => {
-  const theme = THEME;
+ const AnimatedViewStack = Animated.createAnimatedComponent(VStack);
+ const theme = THEME;
   return (
-    <VStack
+    <AnimatedViewStack
+      entering={FadeInRight.delay(1000 + index * 100)}
       borderRadius={8}
       borderTopRightRadius={50}
       width="64"
@@ -38,6 +43,6 @@ export const CoffeeCard = ({
         <Text fontSize={theme.fontSizes.text.sm} color="gray.400">{description}</Text>
         <Text fontSize={theme.fontSizes.heading.lg} fontWeight={theme.fontWeights.bold} color={theme.colors.yellow_dark}>{price}</Text>
       </VStack>
-    </VStack>
+    </AnimatedViewStack>
   );
 };
