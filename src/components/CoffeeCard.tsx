@@ -1,6 +1,6 @@
 import { Box, Text, VStack } from "native-base";
 import { THEME } from "../theme";
-import Animated, { FadeInRight } from "react-native-reanimated";
+import Animated, { SlideInRight } from "react-native-reanimated";
 
 interface IProps {
   urlImage?: string;
@@ -23,7 +23,7 @@ export const CoffeeCard = ({
  const theme = THEME;
   return (
     <AnimatedViewStack
-      entering={FadeInRight.delay(1000 + index * 100)}
+      entering={SlideInRight.delay(1000 + index * 100)}
       borderRadius={8}
       borderTopRightRadius={50}
       width="64"
